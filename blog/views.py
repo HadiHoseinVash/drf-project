@@ -1,4 +1,5 @@
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
 from .models import Item
 from .serializers import ItemSerializer,GameInputSerializer
@@ -29,8 +30,12 @@ class Game(APIView):
         if serializer.is_valid():
             ggg = serializer.validated_data['choice']
             if ggg == 1:
-                return Response({"message": "go to room"})
+                return Response({"me ssage": "go to room"})
             else:
                 return Response({"message": "invalid choice"})
         else:
             return Response(serializer.errors, status=400)
+        
+class humanViewset(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
